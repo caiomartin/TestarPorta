@@ -11,6 +11,7 @@
     android:padding="10dp">
 
     <EditText
+        android:id="@+id/ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
@@ -19,6 +20,7 @@
         android:hint="IP/Dominio    "/>
 
     <EditText
+        android:id="@+id/porta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
@@ -27,6 +29,7 @@
         android:hint="Porta"/>
 
     <Button
+        android:id="@+id/scanSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#069"
@@ -41,23 +44,27 @@
         android:layout_marginTop="30dp">
 
         <TextView
+            android:id="@+id/resultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A porta 8080 está aberta."
-            android:textSize="16dp"
             android:background="@color/colorPrimary"
-            android:padding="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="A porta 8080 está aberta."
             android:textColor="#fff"
-            android:gravity="center"/>
+            android:textSize="16dp"
+            tools:visibility="invisible" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A porta 8080 está Fechada."
-            android:textSize="16dp"
             android:background="@color/colorAccent"
+            android:gravity="center"
             android:padding="10dp"
+            android:text="A porta 8080 está Fechada."
             android:textColor="#fff"
-            android:gravity="center"/>
+            android:textSize="16dp"
+            tools:visibility="invisible" />
 
     </LinearLayout>
 

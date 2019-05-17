@@ -8,8 +8,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
+    final int timeout = 200;
+
+    EditText ip;
+    EditText porta;
+    TextView resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,35 +30,47 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        ip = findViewById(R.id.ip);
+        porta = findViewById(R.id.porta);
+        resultado = findViewById(R.id.resultado);
+
+
+        final Button scanSend = findViewById(R.id.scanSend);
+        scanSend.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                if (portaEstaAberta(ip.getText().toString(),  Integer.parseInt(porta.getText().toString()), timeout)){
+
+                    resultado.setText("A porta "+porta+" está Aberta.");
+                    resultado.setBackgroundResource(R.color.colorPrimary);
+                    resultado.setEnabled(true);
+
+                }else{
+                    resultado.setText("A porta "+porta+" está Fechada.");
+                    resultado.setBackgroundResource(R.color.colorAccent);
+                    resultado.setEnabled(true);
+                }
+
             }
+
+
+
         });
+
+        resultado.setEnabled(false);
+
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+    public static boolean portaEstaAberta(String ip, int porta, int timeout) {
+        try {
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress(ip, porta), timeout);
+            socket.close();
             return true;
+        } catch (Exception ex) {
+            return false;
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
