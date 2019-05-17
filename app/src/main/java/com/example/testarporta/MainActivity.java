@@ -16,6 +16,8 @@ import android.widget.Toast;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import static android.view.View.VISIBLE;
+
 public class MainActivity extends AppCompatActivity {
     final int timeout = 200;
 
@@ -35,21 +37,26 @@ public class MainActivity extends AppCompatActivity {
         resultado = findViewById(R.id.resultado);
 
 
+        resultado.setVisibility(View.INVISIBLE);
+
+
         final Button scanSend = findViewById(R.id.scanSend);
         scanSend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
 
+                resultado.setVisibility(View.INVISIBLE);
+
                 if (portaEstaAberta(ip.getText().toString(),  Integer.parseInt(porta.getText().toString()), timeout)){
 
-                    resultado.setText("A porta "+porta+" está Aberta.");
+                    resultado.setText("A porta "+Integer.parseInt(porta.getText().toString())+" está Aberta.");
                     resultado.setBackgroundResource(R.color.colorPrimary);
-                    resultado.setEnabled(true);
+                    resultado.setVisibility(View.VISIBLE);
 
                 }else{
-                    resultado.setText("A porta "+porta+" está Fechada.");
+                    resultado.setText("A porta "+Integer.parseInt(porta.getText().toString())+" está Fechada.");
                     resultado.setBackgroundResource(R.color.colorAccent);
-                    resultado.setEnabled(true);
+                    resultado.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -57,10 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-
-        resultado.setEnabled(false);
-
-
     }
 
     public static boolean portaEstaAberta(String ip, int porta, int timeout) {

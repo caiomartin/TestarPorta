@@ -55,16 +55,6 @@
             android:textSize="16dp"
             tools:visibility="invisible" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="A porta 8080 está Fechada."
-            android:textColor="#fff"
-            android:textSize="16dp"
-            tools:visibility="invisible" />
 
     </LinearLayout>
 
